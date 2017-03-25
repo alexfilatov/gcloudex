@@ -22,6 +22,10 @@ defmodule GCloudex.Auth do
   @compute_read_only          "https://www.googleapis.com/auth/compute.readonly"
   @compute                    "https://www.googleapis.com/auth/compute"  
 
+  # Cloud Speech scopes
+  @compute_read_only          "https://www.googleapis.com/auth/compute.readonly"
+  @compute                    "https://www.googleapis.com/auth/compute"  
+
   @doc """
   Retrieves an authentication token for the Google Cloud Storage service.
   """

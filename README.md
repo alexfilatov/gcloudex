@@ -48,11 +48,26 @@ That's all you need to use GCloudex.
 > GCloudex.CloudSQL.Client.list_databases "instance_name" # => {:ok, %HTTPoison.Response{body: ...,status_code: 200}}
 > GCloudex.CloudSQL.Client-insert_databaes "instance_name", "db_name" # => {:ok, %HTTPoison.Response{body: ...,status_code: 200}}
 
+### Cloud Speech:
+TODO
+```
+# pass a bucket path
+GCloudex.CloudSpeech.Client.asyncrecognize("foo/bar.flac")
+{:ok,
+ %HTTPoison.Response{body: "{\n  \"name\": \"1234567890\"\n}\n",
+  headers: [...], status_code: 200}}
+
+GCloudex.CloudSpeech.Client.get("1234567890")
+{:ok,
+ %HTTPoison.Response{body: "{\n  \"name\": \"1234567890\",\n  \"metadata\": {...
+```
+
 ## Roadmap
 
  - [x] Google Cloud Storage
  - [x] Google Cloud SQL
  - [x] Google Compute Engine
  - [ ] Google Cloud Datastore
+ - [ ] Google Cloud Speech API
 
 
