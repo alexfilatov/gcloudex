@@ -49,7 +49,7 @@ defmodule GCloudex.Auth do
         get_token_response |> Map.get(:token)
 
       :sql_admin ->
-        {:ok, get_token_response} =
+        {:ok, get_token_response} = 
           GoogleAuth.for_scope @sql_scope_admin
 
         get_token_response |> Map.get(:token)
@@ -66,13 +66,13 @@ defmodule GCloudex.Auth do
         get_token_response |> Map.get(:token)
 
       :compute_read_only ->
-        {:ok, get_token_response} =
+        {:ok, get_token_response} = 
           GoogleAuth.for_scope @compute_read_only
 
         get_token_response |> Map.get(:token)
 
       :compute ->
-        {:ok, get_token_response} =
+        {:ok, get_token_response} = 
           GoogleAuth.for_scope @compute
 
         get_token_response |> Map.get(:token)
