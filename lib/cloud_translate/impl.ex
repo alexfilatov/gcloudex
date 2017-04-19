@@ -19,8 +19,13 @@ defmodule GCloudex.CloudTranslate.Impl do
       }
       """
       @spec translate(body :: binary) :: HTTPResponse.t
-      def translate(body) do
+      def translate(body) when is_binary(body) do
         request(:post, "language/translate/v2", body)
+      end
+
+      @spec translate(map :: map) :: HTTPResponse.t
+      def translate(map) when is_map(map) do
+        request(:post, "language/translate/v2", Poison.encode!(map))
       end
 
       @doc"""
@@ -30,10 +35,16 @@ defmodule GCloudex.CloudTranslate.Impl do
         q: binary (required, the input text upon which to perform language detection)
       }
       """
+      @spec detect(map :: map) :: HTTPResponse.t
+      def detect(map) when is_map(map) do
+        request(:post, "language/translate/v2/detect", Poison.encode!(map))
+      end
+
       @spec detect(body :: binary) :: HTTPResponse.t
-      def detect(body) do
+      def detect(body) when is_binary(body) do
         request(:post, "language/translate/v2/detect", body)
       end
+
 
       @doc"""
       Performs Detect Language
@@ -52,8 +63,6 @@ defmodule GCloudex.CloudTranslate.Impl do
 
       @spec languages(body :: binary) :: HTTPResponse.t
       def languages(body) do
-        require Logger
-        Logger.info "body :: #{inspect body}"
         request(:get, "language/translate/v2/languages", body)
       end
 

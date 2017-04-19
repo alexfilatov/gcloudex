@@ -34,7 +34,8 @@ defmodule CloudTranslateTest do
   #########################
 
   test "list_languages" do
-    assert true == API.languages()
+    expected = build_expected(:get, "language/translate/v2/languages", [], "")
+    assert expected == API.languages()
   end
 
   ###############
