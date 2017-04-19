@@ -35,8 +35,8 @@ defmodule GCloudex.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      {:httpoison, "~> 0.8.3"},
-      {:goth,      "~> 0.1.2"},
+      {:httpoison, "~> 0.11", override: true},
+      {:goth, git: "https://github.com/alexfilatov/goth.git", override: true},
       {:poison,    "~> 1.2 or ~> 2.1"},
       {:credo,     "~> 0.3.13", only: [:dev, :test]},
       {:ex_doc,    ">= 0.11.0", only: [:dev]},
@@ -44,7 +44,7 @@ defmodule GCloudex.Mixfile do
     ]
   end
 
-  defp package do 
+  defp package do
     [
      maintainers: ["Sasha Fonseca"],
      licenses: ["Apache 2.0"],
