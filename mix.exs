@@ -21,7 +21,15 @@ defmodule GCloudex.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger, :httpoison, :goth]]
+    [applications: apps(Mix.env)]
+  end
+
+  def apps(:prod) do
+    [:logger, :httpoison, :goth]
+  end
+
+  def apps(:dev) do
+    apps(:prod) ++ [:remix]
   end
 
   # Dependencies can be Hex packages:
@@ -40,7 +48,8 @@ defmodule GCloudex.Mixfile do
       {:poison,    "~> 1.2 or ~> 2.1"},
       {:credo,     "~> 0.3.13", only: [:dev, :test]},
       {:ex_doc,    ">= 0.11.0", only: [:dev]},
-      {:earmark,   ">= 0.0.0"}
+      {:earmark,   ">= 0.0.0"},
+      {:remix,   ">= 0.0.0", only: [:dev]},
     ]
   end
 
