@@ -32,6 +32,10 @@ defmodule GCloudex.Mixfile do
     apps(:prod) ++ [:remix]
   end
 
+  def apps(_) do
+    apps(:prod)
+  end
+
   # Dependencies can be Hex packages:
   #
   #   {:mydep, "~> 0.3.0"}
