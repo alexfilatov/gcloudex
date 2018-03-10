@@ -24,7 +24,7 @@ defmodule GCloudex.CloudSpeech.Request do
           body,
           headers ++ [{"Authorization", "Bearer #{Auth.get_token_storage(:cs)}"},
                       {"x-goog-project-id", @project}],
-          []
+          [timeout: 50_000, recv_timeout: 50_000]
         )
       end
 

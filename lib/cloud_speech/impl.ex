@@ -15,9 +15,9 @@ defmodule GCloudex.CloudSpeech.Impl do
       Performs asynchronous speech recognition: receive results via the
       google.longrunning.Operations interface.
       """
-      @spec asyncrecognize(body :: binary) :: HTTPResponse.t
-      def asyncrecognize(body) do
-        request(:post, "v1beta1/speech:asyncrecognize", body)
+      @spec longrunningrecognize(body :: binary) :: HTTPResponse.t
+      def longrunningrecognize(body) do
+        request(:post, "v1/speech:longrunningrecognize", body)
       end
 
       ##################
@@ -31,7 +31,7 @@ defmodule GCloudex.CloudSpeech.Impl do
       """
       @spec get(name :: binary) :: HTTPResponse.t
       def get(name) do
-        request(:get, "v1beta1/operations/#{name}")
+        request(:get, "v1/operations/#{name}")
       end
     end
   end

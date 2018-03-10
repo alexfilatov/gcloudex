@@ -7,7 +7,7 @@ defmodule GCloudex.Mixfile do
     [
      app: :gcloudex,
      version: @version,
-     elixir: "~> 1.2",
+     elixir: "~> 1.4",
      description: "Google Cloud for Elixir. Friendly set of wrappers for "
                    <> "Google Cloud Platform API's.",
      build_embedded: Mix.env == :prod,
@@ -49,7 +49,7 @@ defmodule GCloudex.Mixfile do
     [
       {:httpoison, "~> 0.11", override: true},
       {:goth, git: "https://github.com/alexfilatov/goth.git", override: true},
-      {:poison,    "~> 1.2 or ~> 2.1"},
+      {:poison,    "~> 3.0"},
       {:credo,     "~> 0.3.13", only: [:dev, :test]},
       {:ex_doc,    ">= 0.11.0", only: [:dev]},
       {:earmark,   ">= 0.0.0"},

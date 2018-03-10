@@ -74,7 +74,7 @@ body = """
 }
 """
 
-iex> GCloudex.CloudSpeech.Client.asyncrecognize(body)
+iex> GCloudex.CloudSpeech.Client.longrunningrecognize(body)
 {:ok,
  %HTTPoison.Response{body: "{\n  \"name\": \"1234567890\"\n}\n",
   headers: [...], status_code: 200}}
@@ -91,5 +91,3 @@ iex> GCloudex.CloudSpeech.Client.get("1234567890")
  - [x] Google Compute Engine
  - [X] Google Cloud Speech API (partial)
  - [ ] Google Cloud Datastore
-
-

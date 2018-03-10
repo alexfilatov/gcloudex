@@ -32,7 +32,7 @@ defmodule CloudSpeechTest do
   ### POST Speech Tests ###
   #########################
 
-  test "asyncrecognize/1" do
+  test "longrunningrecognize/1" do
     body = """
     {
       "audio": {
@@ -47,9 +47,9 @@ defmodule CloudSpeechTest do
     }
     """
 
-    expected = build_expected(:post, "v1beta1/speech:asyncrecognize", [], body)
+    expected = build_expected(:post, "v1/speech:longrunningrecognize", [], body)
 
-    assert expected == API.asyncrecognize(body)
+    assert expected == API.longrunningrecognize(body)
   end
 
   ########################
@@ -58,7 +58,7 @@ defmodule CloudSpeechTest do
 
   test "get/0" do
     name = "0123456789"
-    expected = build_expected(:get, "v1beta1/operations/#{name}", [], "")
+    expected = build_expected(:get, "v1/operations/#{name}", [], "")
     assert expected == API.get(name)
   end
 

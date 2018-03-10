@@ -1251,19 +1251,20 @@ defmodule ComputeEngineTest do
     assert expected == API.add_access_config zone, instance, interface, name, nat, fields
   end      
 
-  test "add_access_config (no fields no nat)" do 
+  test "add_access_config (no fields no interface)" do 
     zone      = "zone"
     instance  = "instance"
     interface = "interface"
     name      = "name"
     nat       = ""
     headers   = [{"Content-Type", "application/json"}]
-    query     = %{}
+    query     = %{
+      "networkInterface" => interface,
+    }
     body      = %{
       "kind"   => "compute#accessConfig",
       "type"   => "ONE_TO_ONE_NAT",
       "name"   => name,
-      "natIP"  => nat
     } |> Poison.encode!
     endpoint  = @no_zone_ep <> "/zones/#{zone}/instances/#{instance}/addAccessConfig"
     expected  = build_expected(:post, endpoint, headers, body, query |> URI.encode_query)
@@ -1482,7 +1483,7 @@ defmodule ComputeEngineTest do
     assert expected == API.set_metadata zone, instance, fp, items
   end     
 
-  test "set_metadata (no fields)" do 
+  test "set_metadata (with fields)" do 
     zone      = "zone"
     instance  = "instance"
     fp        = "fingerprint"
@@ -1499,7 +1500,7 @@ defmodule ComputeEngineTest do
     fields    = "a,b,c"
     query     = %{"fields" => fields}
     endpoint  = @no_zone_ep <> "/zones/#{zone}/instances/#{instance}/setMetadata"
-    expected  = build_expected(:post, endpoint, headers, body, query |> URI.encode_query)
+    expected  = build_expected(:post, endpoint, headers, body, query)
 
     assert expected == API.set_metadata zone, instance, fp, items, fields
   end       
