@@ -1,14 +1,13 @@
 defmodule GCloudex.CloudSpeech.Request do
-  alias HTTPoison, as: HTTP
-  alias HTTPoison.HTTPResponse
-  alias GCloudex.Auth, as: Auth
-
   @moduledoc """
   Offers HTTP requests to be used by the Google Cloud Speech wrapper.
   """
 
   defmacro __using__(_opts) do
     quote do
+      alias HTTPoison, as: HTTP
+      alias GCloudex.Auth, as: Auth
+      alias HTTPoison.HTTPResponse
 
       @endpoint "speech.googleapis.com"
       @project  GCloudex.get_project_id

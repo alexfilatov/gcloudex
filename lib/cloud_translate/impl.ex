@@ -6,6 +6,7 @@ defmodule GCloudex.CloudTranslate.Impl do
   defmacro __using__(:cloud_translate) do
     quote do
       use GCloudex.CloudTranslate.Request
+      alias HTTPoison.HTTPResponse
 
       @doc"""
       Performs Translate

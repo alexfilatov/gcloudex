@@ -1,14 +1,13 @@
 defmodule GCloudex.CloudStorage.Request do
-  alias HTTPoison, as: HTTP
-  alias HTTPoison.HTTPResponse
-  alias GCloudex.Auth, as: Auth
-
   @moduledoc """
   Offers HTTP requests to be used in by the Google Cloud Storage wrapper.
   """
 
-  defmacro __using__(_opts) do 
+  defmacro __using__(_opts) do
     quote do
+      alias HTTPoison, as: HTTP
+      alias GCloudex.Auth, as: Auth
+      alias HTTPoison.HTTPResponse
 
       @endpoint "storage.googleapis.com"
       @project_id GCloudex.get_project_id
@@ -62,9 +61,9 @@ defmodule GCloudex.CloudStorage.Request do
       end
 
       defoverridable [
-        request_service: 0, 
+        request_service: 0,
         request: 3,
-        request: 4, 
+        request: 4,
         request_query: 5
       ]
     end

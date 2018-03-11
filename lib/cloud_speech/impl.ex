@@ -1,11 +1,11 @@
 defmodule GCloudex.CloudSpeech.Impl do
-
   @moduledoc """
   Wrapper for Google Cloud Speech API.
   """
   defmacro __using__(:cloud_speech) do
     quote do
       use GCloudex.CloudSpeech.Request
+      alias HTTPoison.HTTPResponse
 
       ###################
       ### POST Speech ###

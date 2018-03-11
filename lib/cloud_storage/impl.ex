@@ -3,9 +3,10 @@ defmodule GCloudex.CloudStorage.Impl do
   @moduledoc """
   Wrapper for Google Cloud Storage API.
   """
-  defmacro __using__(:cloud_storage) do 
-    quote do 
+  defmacro __using__(:cloud_storage) do
+    quote do
       use GCloudex.CloudStorage.Request
+      alias HTTPoison.HTTPResponse
 
       @endpoint "storage.googleapis.com"
       @project  GCloudex.get_project_id
@@ -384,7 +385,7 @@ defmodule GCloudex.CloudStorage.Impl do
       defp parse_query_params([{param, val} = _head | []], query), do: query <> param <> "=" <> val
       defp parse_query_params([{param, val} = _head | tail], query) do
         parse_query_params tail, query <> param <> "=" <> val <> "&"
-      end     
+      end
     end
-  end  
+  end
 end
