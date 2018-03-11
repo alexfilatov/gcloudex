@@ -5,7 +5,7 @@ defmodule GCloudex.CloudSQL.Impl do
   defmacro __using__(:cloud_sql) do
     quote do
       use GCloudex.CloudSQL.Request
-      alias HTTPoison.HTTPResponse
+      alias HTTPoison.Response, as: HTTPResponse
 
       @project_id   GCloudex.get_project_id
       @instance_ep  "https://www.googleapis.com/sql/v1beta4/projects/#{@project_id}/instances"

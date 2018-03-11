@@ -5,7 +5,7 @@ defmodule GCloudex.CloudSpeech.Impl do
   defmacro __using__(:cloud_speech) do
     quote do
       use GCloudex.CloudSpeech.Request
-      alias HTTPoison.HTTPResponse
+      alias HTTPoison.Response, as: HTTPResponse
 
       ###################
       ### POST Speech ###

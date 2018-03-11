@@ -6,7 +6,7 @@ defmodule GCloudex.CloudStorage.Impl do
   defmacro __using__(:cloud_storage) do
     quote do
       use GCloudex.CloudStorage.Request
-      alias HTTPoison.HTTPResponse
+      alias HTTPoison.Response, as: HTTPResponse
 
       @endpoint "storage.googleapis.com"
       @project  GCloudex.get_project_id

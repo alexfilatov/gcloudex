@@ -7,7 +7,7 @@ defmodule GCloudex.CloudSQL.Request do
     quote do
       alias HTTPoison, as: HTTP
       alias GCloudex.Auth, as: Auth
-      alias HTTPoison.HTTPResponse
+      alias HTTPoison.Response, as: HTTPResponse
 
       @project_id GCloudex.get_project_id
 

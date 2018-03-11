@@ -7,7 +7,7 @@ defmodule GCloudex.CloudTranslate.Request do
     quote do
       alias HTTPoison, as: HTTP
       alias GCloudex.Auth, as: Auth
-      alias HTTPoison.HTTPResponse
+      alias HTTPoison.Response, as: HTTPResponse
 
       @endpoint "translation.googleapis.com"
       @project  GCloudex.get_project_id

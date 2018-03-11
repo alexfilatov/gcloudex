@@ -6,7 +6,7 @@ defmodule GCloudex.ComputeEngine.Impl do
   defmacro __using__(:compute_engine) do
     quote do
       use GCloudex.ComputeEngine.Request
-      alias HTTPoison.HTTPResponse
+      alias HTTPoison.Response, as: HTTPResponse
 
       @project_id   GCloudex.get_project_id
       @instance_ep "https://www.googleapis.com/compute/v1/projects/#{@project_id}/zones"

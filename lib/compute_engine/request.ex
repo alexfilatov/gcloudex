@@ -6,7 +6,7 @@ defmodule GCloudex.ComputeEngine.Request do
   defmacro __using__(_opts) do
     quote do
       alias GCloudex.Auth, as: Auth
-      alias HTTPoison.HTTPResponse
+      alias HTTPoison.Response, as: HTTPResponse
       require Logger
       @project_id  GCloudex.get_project_id
 

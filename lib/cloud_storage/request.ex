@@ -7,7 +7,7 @@ defmodule GCloudex.CloudStorage.Request do
     quote do
       alias HTTPoison, as: HTTP
       alias GCloudex.Auth, as: Auth
-      alias HTTPoison.HTTPResponse
+      alias HTTPoison.Response, as: HTTPResponse
 
       @endpoint "storage.googleapis.com"
       @project_id GCloudex.get_project_id
