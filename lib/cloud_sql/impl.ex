@@ -69,7 +69,7 @@ defmodule GCloudex.CloudSQL.Impl do
           settings: settings
         }
         |> Map.merge(optional_properties)
-        |> Poison.encode!
+        |> Jason.encode!
 
         request :post, @instance_ep, [{"Content-Type", "application/json"}], body
       end
@@ -104,7 +104,7 @@ defmodule GCloudex.CloudSQL.Impl do
         body = %{
           "cloneContext" => clone_context
         }
-        |> Poison.encode!
+        |> Jason.encode!
         
         request_query(
           :post,
@@ -184,7 +184,7 @@ defmodule GCloudex.CloudSQL.Impl do
 
         body     = %{
           "failoverContext" => failover
-        } |> Poison.encode!
+        } |> Jason.encode!
 
         request_query(
           :post,
@@ -236,7 +236,7 @@ defmodule GCloudex.CloudSQL.Impl do
           "instance" => instance,
           "name"     => name,
           "project"  => @project_id
-        } |> Poison.encode!
+        } |> Jason.encode!
         
         request_query(
           :post,
@@ -284,7 +284,7 @@ defmodule GCloudex.CloudSQL.Impl do
       """
       @spec patch_database(instance :: binary, database :: binary, db_resource :: Map.t) :: HTTPResponse.t
       def patch_database(instance, database, db_resource) do
-        body = db_resource |> Poison.encode!
+        body = db_resource |> Jason.encode!
 
         request_query(
           :patch,
@@ -301,7 +301,7 @@ defmodule GCloudex.CloudSQL.Impl do
       """
       @spec update_database(instance :: binary, database :: binary, db_resource :: Map.t) :: HTTPResponse.t
       def update_database(instance, database, db_resource) do 
-        body = db_resource |> Poison.encode!
+        body = db_resource |> Jason.encode!
 
         request_query(
           :put,
@@ -400,7 +400,7 @@ defmodule GCloudex.CloudSQL.Impl do
           "host"     => host,
           "project"  => @project_id,
           "instance" => instance
-        } |> Poison.encode!
+        } |> Jason.encode!
 
         request_query(
           :post,
@@ -417,7 +417,7 @@ defmodule GCloudex.CloudSQL.Impl do
       """
       @spec update_user(instance :: binary, host :: binary, name :: binary, password :: binary) :: HTTPResponse.t
       def update_user(instance, host, name, password) do 
-        body  = %{"password" => password} |> Poison.encode!
+        body  = %{"password" => password} |> Jason.encode!
         query = "#{instance}/users?host=#{host}&name=#{name}"
 
         request_query(
@@ -567,7 +567,7 @@ defmodule GCloudex.CloudSQL.Impl do
       """
       @spec insert_ssl_cert(instance :: binary, common_name :: binary) :: HTTPResponse.t
       def insert_ssl_cert(instance, common_name) do 
-        body = %{"commonName" => common_name} |> Poison.encode!
+        body = %{"commonName" => common_name} |> Jason.encode!
 
         request_query(
           :post,
@@ -600,7 +600,7 @@ defmodule GCloudex.CloudSQL.Impl do
       """
       @spec create_ephemeral_ssl_cert(instance :: binary, public_key :: binary) :: HTTPResponse.t
       def create_ephemeral_ssl_cert(instance, public_key) do 
-        body = %{"public_key" => public_key} |> Poison.encode!
+        body = %{"public_key" => public_key} |> Jason.encode!
 
         request_query(
           :post,

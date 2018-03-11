@@ -18,7 +18,7 @@ defmodule GCloudex do
         json -> json
       end
     end).()
-    |> Poison.decode!
+    |> Jason.decode!
     |> Map.get("project_id")
   end
 end

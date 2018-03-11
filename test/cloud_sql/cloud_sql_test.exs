@@ -73,7 +73,7 @@ defmodule CloudSQLTest do
       name: name,
       settings: Map.put(settings, :tier, tier)
     }
-    |> Poison.encode!
+    |> Jason.encode!
     expected = build_expected(:post, @instance_ep, headers, body)
 
     assert expected == API.insert_instance name, opts, settings, tier
@@ -91,7 +91,7 @@ defmodule CloudSQLTest do
       first: "first",
       second: "second"
     }
-    |> Poison.encode!
+    |> Jason.encode!
     expected = build_expected(:post, @instance_ep, headers, body)
 
     assert expected == API.insert_instance name, opts, settings, tier
@@ -122,7 +122,7 @@ defmodule CloudSQLTest do
         "destinationInstanceName" => dest_name,
         "kind" => "sql#cloneContext"
       }
-    } |> Poison.encode!
+    } |> Jason.encode!
     expected     = build_expected(:post, @instance_ep, headers, body, "#{instance}/clone")
 
     assert expected == API.clone_instance instance, dest_name, bin_log_file, bin_log_pos
@@ -169,7 +169,7 @@ defmodule CloudSQLTest do
         "kind"            => "sql#failoverContext",
         "settingsVersion" => settings_version
       }
-    } |> Poison.encode!
+    } |> Jason.encode!
     expected = build_expected(:post, @instance_ep, headers, body, "#{instance}/failover")
 
     assert expected == API.failover_instance instance, settings_version
@@ -203,7 +203,7 @@ defmodule CloudSQLTest do
       "instance" => instance,
       "name"     => name,
       "project"  => @project_id
-    } |> Poison.encode!
+    } |> Jason.encode!
     expected = build_expected(:post, @instance_ep, headers, body, "#{instance}/databases")
 
     assert expected == API.insert_database instance, name
@@ -234,7 +234,7 @@ defmodule CloudSQLTest do
     database  = "database"
     patch_map = %{"charset" => "abc", "collation" => "def"}
     headers   = [{"Content-Type", "application/json"}]
-    body      = patch_map |> Poison.encode!
+    body      = patch_map |> Jason.encode!
     expected  = build_expected(:patch, @instance_ep, headers, body, "#{instance}/databases/#{database}")
 
     assert expected == API.patch_database instance, database, patch_map
@@ -245,7 +245,7 @@ defmodule CloudSQLTest do
     database   = "database"
     update_map = %{"field_1" => "abc", "field_2" => "def"}
     headers    = [{"Content-Type", "application/json"}]
-    body       = update_map |> Poison.encode!
+    body       = update_map |> Jason.encode!
     expected   = build_expected(:put, @instance_ep, headers, body, "#{instance}/databases/#{database}")
 
     assert expected == API.update_database instance, database, update_map
@@ -322,7 +322,7 @@ defmodule CloudSQLTest do
       "instance" => instance,
       "host"     => "%",
       "project"  => @project_id
-    } |> Poison.encode!
+    } |> Jason.encode!
     expected  = build_expected(:post, @instance_ep, headers, body, "#{instance}/users")
 
     assert expected == API.insert_user instance, name, password
@@ -340,7 +340,7 @@ defmodule CloudSQLTest do
       "instance" => instance,
       "host"     => host,
       "project"  => @project_id
-    } |> Poison.encode!
+    } |> Jason.encode!
     expected  = build_expected(:post, @instance_ep, headers, body, "#{instance}/users")
 
     assert expected == API.insert_user instance, name, password, host
@@ -353,7 +353,7 @@ defmodule CloudSQLTest do
     password = "password"
     query    = "?host=#{host}&name=#{name}"
     headers  = [{"Content-Type", "application/json"}]
-    body     = %{"password" => password} |> Poison.encode!
+    body     = %{"password" => password} |> Jason.encode!
     expected = build_expected(:put, @instance_ep, headers, body, "#{instance}/users#{query}")
 
     assert expected == API.update_user instance, host, name, password
@@ -431,7 +431,7 @@ defmodule CloudSQLTest do
     instance    = "instance"
     common_name = "common_name"
     headers     = [{"Content-Type", "application/json"}]
-    body        = %{"commonName" => common_name} |> Poison.encode!
+    body        = %{"commonName" => common_name} |> Jason.encode!
     expected    = build_expected(:post, @instance_ep, headers, body, "#{instance}/sslCerts")
 
     assert expected == API.insert_ssl_cert instance, common_name
@@ -451,7 +451,7 @@ defmodule CloudSQLTest do
     instance   = "instance"
     public_key = "public_key"
     headers    = [{"Content-Type", "application/json"}]
-    body       = %{"public_key" => public_key} |> Poison.encode! 
+    body       = %{"public_key" => public_key} |> Jason.encode!
     expected   = build_expected(:post, @instance_ep, headers, body, "#{instance}/createEphemeral")
 
     assert expected == API.create_ephemeral_ssl_cert instance, public_key

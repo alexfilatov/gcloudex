@@ -47,7 +47,7 @@ defmodule GCloudex.ComputeEngine.Impl do
       @spec insert_autoscaler(zone :: binary, autoscaler_resource :: Map.t, fields :: binary) :: HTTPResponse.t | no_return
       def insert_autoscaler(zone, autoscaler_resource, fields \\ "") do
         query = fields_binary_to_map fields
-        body  = autoscaler_resource |> Poison.encode!
+        body  = autoscaler_resource |> Jason.encode!
 
         request(
           :post, 
@@ -70,7 +70,7 @@ defmodule GCloudex.ComputeEngine.Impl do
             %{"autoscaler" => autoscaler_name, "fields" => fields} |> URI.encode_query
           end
 
-        body  = autoscaler_resource |> Poison.encode!
+        body  = autoscaler_resource |> Jason.encode!
 
         request(
           :patch, 
@@ -87,7 +87,7 @@ defmodule GCloudex.ComputeEngine.Impl do
       """
       @spec update_autoscaler(zone :: binary, autoscaler_name :: binary, autoscaler_resource :: Map.t, fields :: binary) :: HTTPResponse.t
       def update_autoscaler(zone, autoscaler_name \\ "", autoscaler_resource, fields \\ "") do
-        body  = autoscaler_resource |> Poison.encode!
+        body  = autoscaler_resource |> Jason.encode!
         query = 
           case {autoscaler_name == "", fields == ""} do 
             {true, true} ->
@@ -222,7 +222,7 @@ defmodule GCloudex.ComputeEngine.Impl do
               %{} |> URI.encode_query
           end
 
-        body = disk_resource |> Poison.encode!
+        body = disk_resource |> Jason.encode!
 
         request(
           :post,
@@ -249,7 +249,7 @@ defmodule GCloudex.ComputeEngine.Impl do
       @spec resize_disk(zone :: binary, disk :: binary, size_gb :: pos_integer, fields :: binary) :: HTTPResponse.t
       def resize_disk(zone, disk, size_gb, fields \\ "") when size_gb > 0 do 
         query = fields_binary_to_map fields
-        body  = %{"sizeGb" => size_gb} |> Poison.encode!
+        body  = %{"sizeGb" => size_gb} |> Jason.encode!
 
         request(
           :post, 
@@ -279,7 +279,7 @@ defmodule GCloudex.ComputeEngine.Impl do
       @spec create_snapshot(zone :: binary, disk :: binary, request :: Map.t, fields :: binary) :: HTTPResponse.t
       def create_snapshot(zone, disk, request, fields \\ "") when request != %{} do
         query = fields_binary_to_map fields
-        body  = request |> Poison.encode!
+        body  = request |> Jason.encode!
 
         request(
           :post, 
@@ -322,7 +322,7 @@ defmodule GCloudex.ComputeEngine.Impl do
       @spec insert_firewall(firewall_resource :: Map.t, fields :: binary) :: HTTPResponse.t
       def insert_firewall(firewall_resource, fields \\ "") when is_map(firewall_resource) do
         query = fields_binary_to_map fields
-        body  = firewall_resource |> Poison.encode!
+        body  = firewall_resource |> Jason.encode!
 
         request(
           :post, 
@@ -339,7 +339,7 @@ defmodule GCloudex.ComputeEngine.Impl do
       @spec patch_firewall(firewall :: binary, firewall_resource :: Map.t, fields :: binary) :: HTTPResponse.t
       def patch_firewall(firewall, firewall_resource, fields \\ "") when is_map(firewall_resource) do
         query = fields_binary_to_map fields
-        body  = firewall_resource |> Poison.encode!
+        body  = firewall_resource |> Jason.encode!
 
         request(
           :patch, 
@@ -356,7 +356,7 @@ defmodule GCloudex.ComputeEngine.Impl do
       @spec update_firewall(firewall :: binary, firewall_resource :: map, fields :: binary) :: HTTPResponse.t
       def update_firewall(firewall, firewall_resource, fields \\ "") when is_map(firewall_resource) do
         query = fields_binary_to_map fields
-        body  = firewall_resource |> Poison.encode!
+        body  = firewall_resource |> Jason.encode!
 
         request(
           :put, 
@@ -432,7 +432,7 @@ defmodule GCloudex.ComputeEngine.Impl do
       """
       @spec insert_image_with_resource(image_resource :: Map.t, fields :: binary) :: HTTPResponse.t
       def insert_image_with_resource(image_resource, fields \\ "") when is_map(image_resource) do 
-        body  = image_resource |> Poison.encode!
+        body  = image_resource |> Jason.encode!
         query = 
           if fields == "" do 
             fields
@@ -456,7 +456,7 @@ defmodule GCloudex.ComputeEngine.Impl do
       """
       @spec insert_image(name :: binary, source_url :: binary, fields :: binary) :: HTTPResponse.t
       def insert_image(name, source_url, fields \\ "") do
-        body  = %{"name" => name, "rawDisk" => %{"source" => source_url}} |> Poison.encode!
+        body  = %{"name" => name, "rawDisk" => %{"source" => source_url}} |> Jason.encode!
         query = 
           if fields == "" do 
             fields
@@ -493,7 +493,7 @@ defmodule GCloudex.ComputeEngine.Impl do
       """
       @spec deprecate_image(image :: binary, request_params :: Map.t, fields :: binary) :: HTTPResponse.t
       def deprecate_image(image, request_params, fields \\ "") do 
-        body  = request_params |> Poison.encode!
+        body  = request_params |> Jason.encode!
         query = 
           if fields == "" do 
             fields
@@ -532,7 +532,7 @@ defmodule GCloudex.ComputeEngine.Impl do
       @spec list_instances_in_group(zone :: binary, instance_group :: binary, instance_state :: binary, query_params :: Map.t) :: HTTPResponse.t
       def list_instances_in_group(zone, instance_group, instance_state \\ "", query_params \\ %{}) do
         query = query_params |> URI.encode_query
-        body  = %{"instanceState" => instance_state} |> Poison.encode!
+        body  = %{"instanceState" => instance_state} |> Jason.encode!
 
         request(
           :post,
@@ -561,7 +561,7 @@ defmodule GCloudex.ComputeEngine.Impl do
       @spec insert_instance_group(zone :: binary, instance_group_resource :: map, fields :: binary) :: HTTPResponse.t
       def insert_instance_group(zone, instance_group_resource, fields \\ "") when is_map(instance_group_resource) do
         query = fields_binary_to_map fields
-        body  = instance_group_resource |> Poison.encode!
+        body  = instance_group_resource |> Jason.encode!
         
         request(
           :post,
@@ -604,7 +604,7 @@ defmodule GCloudex.ComputeEngine.Impl do
       def add_instances_to_group(zone, instance_group, instances, fields \\ "") do
         query = fields_binary_to_map fields
         body  = %{"instances" => build_list_of_instances(instances, [])}
-        |> Poison.encode!
+        |> Jason.encode!
 
         request(
           :post, 
@@ -622,7 +622,7 @@ defmodule GCloudex.ComputeEngine.Impl do
       def remove_instances_from_group(zone, instance_group, instances, fields \\ "") do
         query = fields_binary_to_map fields
         body  = %{"instances" => build_list_of_instances(instances, [])}
-        |> Poison.encode!
+        |> Jason.encode!
 
         request(
           :post, 
@@ -644,9 +644,9 @@ defmodule GCloudex.ComputeEngine.Impl do
 
         body = 
           if fingerprint != "" do 
-            body |> Map.put_new("fingerprint", fingerprint) |> Poison.encode!
+            body |> Map.put_new("fingerprint", fingerprint) |> Jason.encode!
           else
-            body |> Poison.encode!
+            body |> Jason.encode!
           end
 
         request(
@@ -743,7 +743,7 @@ defmodule GCloudex.ComputeEngine.Impl do
       """
       @spec insert_instance(zone :: binary, instance_resource :: Map.t, fields :: binary) :: HTTPResponse.t
       def insert_instance(zone, instance_resource, fields \\ "") do
-        body  = instance_resource |> Poison.encode!
+        body  = instance_resource |> Jason.encode!
         query = 
           if fields == "" do 
             fields
@@ -873,7 +873,7 @@ defmodule GCloudex.ComputeEngine.Impl do
           :post,
           @instance_ep <> "/#{zone}/instances/#{instance}/addAccessConfig",
           [{"Content-Type", "application/json"}],
-          body |> Poison.encode!,
+          body |> Jason.encode!,
           query)
       end
 
@@ -960,7 +960,7 @@ defmodule GCloudex.ComputeEngine.Impl do
           :post, 
           @instance_ep <> "/#{zone}/instances/#{instance}/attachDisk",
           [{"Content-Type", "application/json"}],
-          disk_resource |> Poison.encode!,
+          disk_resource |> Jason.encode!,
           query)
       end
 
@@ -1047,7 +1047,7 @@ defmodule GCloudex.ComputeEngine.Impl do
       """
       @spec set_machine_type(zone :: binary, instance :: binary, machine_type :: binary, fields :: binary) :: HTTPResponse.t
       def set_machine_type(zone, instance, machine_type, fields \\ "") do 
-        body = %{"machineType" => machine_type} |> Poison.encode!
+        body = %{"machineType" => machine_type} |> Jason.encode!
         query = 
           if fields == "" do
             fields
@@ -1084,7 +1084,7 @@ defmodule GCloudex.ComputeEngine.Impl do
         body = %{"kind" => "compute#metadata"}
         |> Map.put_new("fingerprint", fingerprint)
         |> Map.put_new("items", items)
-        |> Poison.encode!
+        |> Jason.encode!
 
         query = 
           if fields == "" do
@@ -1112,7 +1112,7 @@ defmodule GCloudex.ComputeEngine.Impl do
                   "automaticRestart"  => automatic_restart,
                   "preemptible"       => preemptible
                 }
-        |> Poison.encode!
+        |> Jason.encode!
 
         query = 
           if fields == "" do
@@ -1135,7 +1135,7 @@ defmodule GCloudex.ComputeEngine.Impl do
       """
       @spec set_tags(zone :: binary, instance :: binary, fingerprint :: binary, items :: list(binary), fields :: binary) :: HTTPResponse.t
       def set_tags(zone, instance, fingerprint, items, fields \\ "") do 
-        body  = %{"fingerprint" => fingerprint, "items" => items} |> Poison.encode!
+        body  = %{"fingerprint" => fingerprint, "items" => items} |> Jason.encode!
         query = 
           if fields == "" do
             fields
@@ -1244,7 +1244,7 @@ defmodule GCloudex.ComputeEngine.Impl do
       @spec insert_network(network_resource :: Map.t, fields :: binary) :: HTTPResponse.t | no_return
       def insert_network(network_resource, fields \\ "") when is_map(network_resource) do
         query = fields_binary_to_map fields
-        body  = network_resource |> Poison.encode!
+        body  = network_resource |> Jason.encode!
 
         request(
           :post, 

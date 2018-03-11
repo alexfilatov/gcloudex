@@ -49,7 +49,7 @@ defmodule GCloudex.Mixfile do
     [
       {:httpoison, "~> 0.11", override: true},
       {:goth, git: "https://github.com/alexfilatov/goth.git", override: true},
-      {:poison,    "~> 3.0"},
+      {:jason,    ">= 0.0.0"},
       {:credo,     "~> 0.3.13", only: [:dev, :test]},
       {:ex_doc,    ">= 0.11.0", only: [:dev]},
       {:earmark,   ">= 0.0.0"},

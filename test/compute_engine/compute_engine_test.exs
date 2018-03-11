@@ -81,7 +81,7 @@ defmodule ComputeEngineTest do
     zone       = "zone"
     resource   = %{"name" => "abc", "target" => "def"}
     headers    = [{"Content-Type", "application/json"}]
-    body       = resource |> Poison.encode!
+    body       = resource |> Jason.encode!
     endpoint   = @no_zone_ep <> "/zones/#{zone}/autoscalers"
     expected   = build_expected(:post, endpoint, headers, body)
     
@@ -94,7 +94,7 @@ defmodule ComputeEngineTest do
     headers    = [{"Content-Type", "application/json"}]
     fields     = "a,b,c"
     query      = %{"fields" => fields}
-    body       = resource |> Poison.encode!
+    body       = resource |> Jason.encode!
     endpoint   = @no_zone_ep <> "/zones/#{zone}/autoscalers"
     expected   = build_expected(:post, endpoint, headers, body, query |> URI.encode_query)
     
@@ -106,7 +106,7 @@ defmodule ComputeEngineTest do
     name     = "name"
     resource = %{"field1" => "abc"}
     headers  = [{"Content-Type", "application/json"}]
-    body     = resource |> Poison.encode!
+    body     = resource |> Jason.encode!
     query    = %{"autoscaler" => name}
     endpoint = @no_zone_ep <> "/zones/#{zone}/autoscalers"
     expected = build_expected(:patch, endpoint, headers, body, query |> URI.encode_query)
@@ -119,7 +119,7 @@ defmodule ComputeEngineTest do
     name     = "name"
     resource = %{"field1" => "abc"}
     headers  = [{"Content-Type", "application/json"}]
-    body     = resource |> Poison.encode!
+    body     = resource |> Jason.encode!
     fields   = "a,b,c"
     query    = %{"autoscaler" => name, "fields" => fields}
     endpoint = @no_zone_ep <> "/zones/#{zone}/autoscalers"
@@ -133,7 +133,7 @@ defmodule ComputeEngineTest do
     name     = "name"
     resource = %{"field1" => "abc"}
     headers  = [{"Content-Type", "application/json"}]
-    body     = resource |> Poison.encode!
+    body     = resource |> Jason.encode!
     query    = %{"autoscaler" => name}
     endpoint = @no_zone_ep <> "/zones/#{zone}/autoscalers"
     expected = build_expected(:put, endpoint, headers, body, query |> URI.encode_query)
@@ -146,7 +146,7 @@ defmodule ComputeEngineTest do
     name     = "name"
     resource = %{"field1" => "abc"}
     headers  = [{"Content-Type", "application/json"}]
-    body     = resource |> Poison.encode!
+    body     = resource |> Jason.encode!
     fields   = "a,b,c"
     query    = %{"autoscaler" => name, "fields" => fields}
     endpoint = @no_zone_ep <> "/zones/#{zone}/autoscalers"
@@ -160,7 +160,7 @@ defmodule ComputeEngineTest do
     name     = ""
     resource = %{"field1" => "abc"}
     headers  = [{"Content-Type", "application/json"}]
-    body     = resource |> Poison.encode!
+    body     = resource |> Jason.encode!
     fields   = "a,b,c"
     query    = %{"fields" => fields}
     endpoint = @no_zone_ep <> "/zones/#{zone}/autoscalers"
@@ -174,7 +174,7 @@ defmodule ComputeEngineTest do
     name     = ""
     resource = %{"field1" => "abc"}
     headers  = [{"Content-Type", "application/json"}]
-    body     = resource |> Poison.encode!
+    body     = resource |> Jason.encode!
     query    = %{}
     endpoint = @no_zone_ep <> "/zones/#{zone}/autoscalers"
     expected = build_expected(:put, endpoint, headers, body, query |> URI.encode_query)
@@ -347,7 +347,7 @@ defmodule ComputeEngineTest do
     resource   = %{"name" => "name"}
     source_img = "source_image"
     headers    = [{"Content-Type", "application/json"}]
-    body       = resource |> Poison.encode!
+    body       = resource |> Jason.encode!
     query      = %{"sourceImage" => source_img}
     endpoint   = @no_zone_ep <> "/zones/#{zone}/disks"
     expected   = build_expected(:post, endpoint, headers, body, query |> URI.encode_query)
@@ -361,7 +361,7 @@ defmodule ComputeEngineTest do
     source_img = "source_image"
     headers    = [{"Content-Type", "application/json"}]
     fields     = "a,b,c"
-    body       = resource |> Poison.encode!
+    body       = resource |> Jason.encode!
     query      = %{"sourceImage" => source_img, "fields" => fields}
     endpoint   = @no_zone_ep <> "/zones/#{zone}/disks"
     expected   = build_expected(:post, endpoint, headers, body, query |> URI.encode_query)
@@ -375,7 +375,7 @@ defmodule ComputeEngineTest do
     source_img = ""
     headers    = [{"Content-Type", "application/json"}]
     fields     = "a,b,c"
-    body       = resource |> Poison.encode!
+    body       = resource |> Jason.encode!
     query      = %{"fields" => fields}
     endpoint   = @no_zone_ep <> "/zones/#{zone}/disks"
     expected   = build_expected(:post, endpoint, headers, body, query |> URI.encode_query)
@@ -388,7 +388,7 @@ defmodule ComputeEngineTest do
     resource   = %{"name" => "name"}
     source_img = ""
     headers    = [{"Content-Type", "application/json"}]
-    body       = resource |> Poison.encode!
+    body       = resource |> Jason.encode!
     query      = %{}
     endpoint   = @no_zone_ep <> "/zones/#{zone}/disks"
     expected   = build_expected(:post, endpoint, headers, body, query |> URI.encode_query)
@@ -425,7 +425,7 @@ defmodule ComputeEngineTest do
     disk       = "disk"
     size       = 10
     headers    = [{"Content-Type", "application/json"}]
-    body       = %{"sizeGb" => size} |> Poison.encode!
+    body       = %{"sizeGb" => size} |> Jason.encode!
     endpoint   = @no_zone_ep <> "/zones/#{zone}/disks/#{disk}/resize"
     expected   = build_expected(:post, endpoint, headers, body)
 
@@ -437,7 +437,7 @@ defmodule ComputeEngineTest do
     disk       = "disk"
     size       = 10
     headers    = [{"Content-Type", "application/json"}]
-    body       = %{"sizeGb" => size} |> Poison.encode!
+    body       = %{"sizeGb" => size} |> Jason.encode!
     fields     = "a,b,c"
     query      = %{"fields" => fields}
     endpoint   = @no_zone_ep <> "/zones/#{zone}/disks/#{disk}/resize"
@@ -470,7 +470,7 @@ defmodule ComputeEngineTest do
     disk       = "disk"
     resource   = %{"abc" => 1, "def" => 2}
     headers    = [{"Content-Type", "application/json"}]
-    body       = resource |> Poison.encode!
+    body       = resource |> Jason.encode!
     endpoint   = @no_zone_ep <> "/zones/#{zone}/disks/#{disk}/createSnapshot"
     expected   = build_expected(:post, endpoint, headers, body)
 
@@ -484,7 +484,7 @@ defmodule ComputeEngineTest do
     headers    = [{"Content-Type", "application/json"}]
     fields     = "a,b,c"
     query      = %{"fields" => fields}
-    body       = resource |> Poison.encode!
+    body       = resource |> Jason.encode!
     endpoint   = @no_zone_ep <> "/zones/#{zone}/disks/#{disk}/createSnapshot"
     expected   = build_expected(:post, endpoint, headers, body, query |> URI.encode_query)
 
@@ -539,7 +539,7 @@ defmodule ComputeEngineTest do
   test "insert_firewall (no fields)" do 
     resource = %{"abc" => 1, "def" => 2}
     headers  = [{"Content-Type", "application/json"}]
-    body     = resource |> Poison.encode!
+    body     = resource |> Jason.encode!
     endpoint = @no_zone_ep <> "/global/firewalls"
     expected = build_expected(:post, endpoint, headers, body)
 
@@ -549,7 +549,7 @@ defmodule ComputeEngineTest do
   test "insert_firewall (with fields)" do 
     resource = %{"abc" => 1, "def" => 2}
     headers  = [{"Content-Type", "application/json"}]
-    body     = resource |> Poison.encode!
+    body     = resource |> Jason.encode!
     fields   = "a,b,c"
     query    = %{"fields" => fields}
     endpoint = @no_zone_ep <> "/global/firewalls"
@@ -562,7 +562,7 @@ defmodule ComputeEngineTest do
     firewall = "firewall"
     resource = %{"abc" => 1, "def" => 2}
     headers  = [{"Content-Type", "application/json"}]
-    body     = resource |> Poison.encode!
+    body     = resource |> Jason.encode!
     endpoint = @no_zone_ep <> "/global/firewalls/#{firewall}"
     expected = build_expected(:patch, endpoint, headers, body)
 
@@ -573,7 +573,7 @@ defmodule ComputeEngineTest do
     firewall = "firewall"
     resource = %{"abc" => 1, "def" => 2}
     headers  = [{"Content-Type", "application/json"}]
-    body     = resource |> Poison.encode!
+    body     = resource |> Jason.encode!
     fields   = "a,b,c"
     query    = %{"fields" => fields}
     endpoint = @no_zone_ep <> "/global/firewalls/#{firewall}"
@@ -586,7 +586,7 @@ defmodule ComputeEngineTest do
     firewall = "firewall"
     resource = %{"abc" => 1, "def" => 2}
     headers  = [{"Content-Type", "application/json"}]
-    body     = resource |> Poison.encode!
+    body     = resource |> Jason.encode!
     endpoint = @no_zone_ep <> "/global/firewalls/#{firewall}"
     expected = build_expected(:put, endpoint, headers, body)
 
@@ -597,7 +597,7 @@ defmodule ComputeEngineTest do
     firewall = "firewall"
     resource = %{"abc" => 1, "def" => 2}
     headers  = [{"Content-Type", "application/json"}]
-    body     = resource |> Poison.encode!
+    body     = resource |> Jason.encode!
     fields   = "a,b,c"
     query    = %{"fields" => fields}
     endpoint = @no_zone_ep <> "/global/firewalls/#{firewall}"
@@ -674,7 +674,7 @@ defmodule ComputeEngineTest do
   test "insert_image_with_resource (no fields)" do 
     resource   = %{"abc" => 1, "def" => 2}
     headers    = [{"Content-Type", "application/json"}]
-    body       = resource |> Poison.encode!
+    body       = resource |> Jason.encode!
     endpoint   = @no_zone_ep <> "/global/images"
     expected   = build_expected(:post, endpoint, headers, body)
 
@@ -684,7 +684,7 @@ defmodule ComputeEngineTest do
   test "insert_image_with_resource (with fields)" do 
     resource   = %{"abc" => 1, "def" => 2}
     headers    = [{"Content-Type", "application/json"}]
-    body       = resource |> Poison.encode!
+    body       = resource |> Jason.encode!
     fields     = "a,b,c"
     query      = %{"fields" => fields}
     endpoint   = @no_zone_ep <> "/global/images"
@@ -697,7 +697,7 @@ defmodule ComputeEngineTest do
     name       = "name"
     url        = "url"
     headers    = [{"Content-Type", "application/json"}]
-    body       = %{"name" => name, "rawDisk" => %{"source" => url}} |> Poison.encode!
+    body       = %{"name" => name, "rawDisk" => %{"source" => url}} |> Jason.encode!
     endpoint   = @no_zone_ep <> "/global/images"
     expected   = build_expected(:post, endpoint, headers, body)
 
@@ -710,7 +710,7 @@ defmodule ComputeEngineTest do
     headers    = [{"Content-Type", "application/json"}]
     fields     = "a,b,c"
     query      = %{"fields" => fields}
-    body       = %{"name" => name, "rawDisk" => %{"source" => url}} |> Poison.encode!
+    body       = %{"name" => name, "rawDisk" => %{"source" => url}} |> Jason.encode!
     endpoint   = @no_zone_ep <> "/global/images"
     expected   = build_expected(:post, endpoint, headers, body, query |> URI.encode_query)
 
@@ -743,7 +743,7 @@ defmodule ComputeEngineTest do
     image      = "image"
     request    = %{"abc" => 1, "def" => 2}
     headers    = [{"Content-Type", "application/json"}]
-    body       = request |> Poison.encode!
+    body       = request |> Jason.encode!
     endpoint   = @no_zone_ep <> "/global/images/#{image}/deprecate"
     expected   = build_expected(:post, endpoint, headers, body)
 
@@ -754,7 +754,7 @@ defmodule ComputeEngineTest do
     image      = "image"
     request    = %{"abc" => 1, "def" => 2}
     headers    = [{"Content-Type", "application/json"}]
-    body       = request |> Poison.encode!
+    body       = request |> Jason.encode!
     fields     = "a,b,c"
     query      = %{"fields" => fields} 
     endpoint   = @no_zone_ep <> "/global/images/#{image}/deprecate"
@@ -793,7 +793,7 @@ defmodule ComputeEngineTest do
     group      = "group"
     state      = "state"
     headers    = [{"Content-Type", "application/json"}]
-    body       = %{"instanceState" => state} |> Poison.encode!
+    body       = %{"instanceState" => state} |> Jason.encode!
     endpoint   = @no_zone_ep <> "/zones/#{zone}/instanceGroups/#{group}/listInstances"
     expected   = build_expected(:post, endpoint, headers, body)
 
@@ -805,7 +805,7 @@ defmodule ComputeEngineTest do
     group      = "group"
     state      = "state"
     headers    = [{"Content-Type", "application/json"}]
-    body       = %{"instanceState" => state} |> Poison.encode!
+    body       = %{"instanceState" => state} |> Jason.encode!
     query      = %{"abc" => 1, "def" => 2}
     endpoint   = @no_zone_ep <> "/zones/#{zone}/instanceGroups/#{group}/listInstances"
     expected   = build_expected(:post, endpoint, headers, body, query |> URI.encode_query)
@@ -841,7 +841,7 @@ defmodule ComputeEngineTest do
     zone       = "zone"
     resource   = %{"abc" => 1, "def" => 2}
     headers    = [{"Content-Type", "application/json"}]
-    body       = resource |> Poison.encode!
+    body       = resource |> Jason.encode!
     endpoint   = @no_zone_ep <> "/zones/#{zone}/instanceGroups"
     expected   = build_expected(:post, endpoint, headers, body)
 
@@ -852,7 +852,7 @@ defmodule ComputeEngineTest do
     zone       = "zone"
     resource   = %{"abc" => 1, "def" => 2}
     headers    = [{"Content-Type", "application/json"}]
-    body       = resource |> Poison.encode!
+    body       = resource |> Jason.encode!
     fields     = "a,b,c"
     query      = %{"fields" => fields}
     endpoint   = @no_zone_ep <> "/zones/#{zone}/instanceGroups"
@@ -915,7 +915,7 @@ defmodule ComputeEngineTest do
         %{"instance" => "b"},
         %{"instance" => "c"}
       ]
-    } |> Poison.encode!
+    } |> Jason.encode!
     endpoint   = @no_zone_ep <> "/zones/#{zone}/instanceGroups/#{group}/addInstances"
     expected   = build_expected(:post, endpoint, headers, body)
 
@@ -935,7 +935,7 @@ defmodule ComputeEngineTest do
         %{"instance" => "b"},
         %{"instance" => "c"}
       ]
-    } |> Poison.encode!
+    } |> Jason.encode!
     endpoint   = @no_zone_ep <> "/zones/#{zone}/instanceGroups/#{group}/addInstances"
     expected   = build_expected(:post, endpoint, headers, body, query |> URI.encode_query)
 
@@ -953,7 +953,7 @@ defmodule ComputeEngineTest do
         %{"instance" => "b"},
         %{"instance" => "c"}
       ]
-    } |> Poison.encode!
+    } |> Jason.encode!
     endpoint   = @no_zone_ep <> "/zones/#{zone}/instanceGroups/#{group}/removeInstances"
     expected   = build_expected(:post, endpoint, headers, body)
 
@@ -973,7 +973,7 @@ defmodule ComputeEngineTest do
         %{"instance" => "b"},
         %{"instance" => "c"}
       ]
-    } |> Poison.encode!
+    } |> Jason.encode!
     endpoint   = @no_zone_ep <> "/zones/#{zone}/instanceGroups/#{group}/removeInstances"
     expected   = build_expected(:post, endpoint, headers, body, query |> URI.encode_query)
 
@@ -993,7 +993,7 @@ defmodule ComputeEngineTest do
         %{"name" => "c", "port" => "3"}
       ],
       "fingerprint" => fp
-    } |> Poison.encode!
+    } |> Jason.encode!
     endpoint   = @no_zone_ep <> "/zones/#{zone}/instanceGroups/#{group}/setNamedPorts"
     expected   = build_expected(:post, endpoint, headers, body)
 
@@ -1015,7 +1015,7 @@ defmodule ComputeEngineTest do
         %{"name" => "c", "port" => "3"}
       ],
       "fingerprint" => fp
-    } |> Poison.encode!
+    } |> Jason.encode!
     endpoint   = @no_zone_ep <> "/zones/#{zone}/instanceGroups/#{group}/setNamedPorts"
     expected   = build_expected(:post, endpoint, headers, body)
 
@@ -1075,7 +1075,7 @@ defmodule ComputeEngineTest do
     zone     = "zone"
     resource = %{"abc" => 1, "def" => 2}
     headers  = [{"Content-Type", "application/json"}]
-    body     = resource |> Poison.encode!
+    body     = resource |> Jason.encode!
     endpoint = @no_zone_ep <> "/zones/#{zone}/instances"
     expected = build_expected(:post, endpoint, headers, body)
 
@@ -1086,7 +1086,7 @@ defmodule ComputeEngineTest do
     zone     = "zone"
     resource = %{"abc" => 1, "def" => 2}
     headers  = [{"Content-Type", "application/json"}]
-    body     = resource |> Poison.encode!
+    body     = resource |> Jason.encode!
     fields   = "a,b,c"
     query    = %{"fields" => fields}
     endpoint = @no_zone_ep <> "/zones/#{zone}/instances"
@@ -1204,7 +1204,7 @@ defmodule ComputeEngineTest do
       "type"   => "ONE_TO_ONE_NAT",
       "name"   => name,
       "natIP"  => nat
-    } |> Poison.encode!
+    } |> Jason.encode!
     endpoint  = @no_zone_ep <> "/zones/#{zone}/instances/#{instance}/addAccessConfig"
     expected  = build_expected(:post, endpoint, headers, body, query |> URI.encode_query)
 
@@ -1223,7 +1223,7 @@ defmodule ComputeEngineTest do
       "kind" => "compute#accessConfig",
       "type" => "ONE_TO_ONE_NAT",
       "name" => name,
-    } |> Poison.encode!
+    } |> Jason.encode!
     endpoint  = @no_zone_ep <> "/zones/#{zone}/instances/#{instance}/addAccessConfig"
     expected  = build_expected(:post, endpoint, headers, body, query |> URI.encode_query)
 
@@ -1244,7 +1244,7 @@ defmodule ComputeEngineTest do
       "type"   => "ONE_TO_ONE_NAT",
       "name"   => name,
       "natIP"  => nat
-    } |> Poison.encode!
+    } |> Jason.encode!
     endpoint  = @no_zone_ep <> "/zones/#{zone}/instances/#{instance}/addAccessConfig"
     expected  = build_expected(:post, endpoint, headers, body, query |> URI.encode_query)
 
@@ -1265,7 +1265,7 @@ defmodule ComputeEngineTest do
       "kind"   => "compute#accessConfig",
       "type"   => "ONE_TO_ONE_NAT",
       "name"   => name,
-    } |> Poison.encode!
+    } |> Jason.encode!
     endpoint  = @no_zone_ep <> "/zones/#{zone}/instances/#{instance}/addAccessConfig"
     expected  = build_expected(:post, endpoint, headers, body, query |> URI.encode_query)
 
@@ -1329,7 +1329,7 @@ defmodule ComputeEngineTest do
     instance  = "instance"
     resource  = %{"abc" => 1, "def" => 2}
     headers   = [{"Content-Type", "application/json"}]
-    body      = resource |> Poison.encode!
+    body      = resource |> Jason.encode!
     endpoint  = @no_zone_ep <> "/zones/#{zone}/instances/#{instance}/attachDisk"
     expected  = build_expected(:post, endpoint, headers, body)
 
@@ -1341,7 +1341,7 @@ defmodule ComputeEngineTest do
     instance  = "instance"
     resource  = %{"abc" => 1, "def" => 2}
     headers   = [{"Content-Type", "application/json"}]
-    body      = resource |> Poison.encode!
+    body      = resource |> Jason.encode!
     fields    = "a,b,c"
     query     = %{"fields" => fields}
     endpoint  = @no_zone_ep <> "/zones/#{zone}/instances/#{instance}/attachDisk"
@@ -1442,7 +1442,7 @@ defmodule ComputeEngineTest do
     instance  = "instance"
     type      = "type"
     headers   = [{"Content-Type", "application/json"}]
-    body      = %{"machineType" => type} |> Poison.encode!
+    body      = %{"machineType" => type} |> Jason.encode!
     endpoint  = @no_zone_ep <> "/zones/#{zone}/instances/#{instance}/setMachineType"
     expected  = build_expected(:post, endpoint, headers, body)
 
@@ -1454,7 +1454,7 @@ defmodule ComputeEngineTest do
     instance  = "instance"
     type      = "type"
     headers   = [{"Content-Type", "application/json"}]
-    body      = %{"machineType" => type} |> Poison.encode!
+    body      = %{"machineType" => type} |> Jason.encode!
     fields    = "a,b,c"
     query     = %{"fields" => fields}
     endpoint  = @no_zone_ep <> "/zones/#{zone}/instances/#{instance}/setMachineType"
@@ -1476,7 +1476,7 @@ defmodule ComputeEngineTest do
       "kind"        => "compute#metadata",
       "fingerprint" => fp,
       "items"       => items
-    } |> Poison.encode!
+    } |> Jason.encode!
     endpoint  = @no_zone_ep <> "/zones/#{zone}/instances/#{instance}/setMetadata"
     expected  = build_expected(:post, endpoint, headers, body)
 
@@ -1496,7 +1496,7 @@ defmodule ComputeEngineTest do
       "kind"        => "compute#metadata",
       "fingerprint" => fp,
       "items"       => items
-    } |> Poison.encode!
+    } |> Jason.encode!
     fields    = "a,b,c"
     query     = %{"fields" => fields}
     endpoint  = @no_zone_ep <> "/zones/#{zone}/instances/#{instance}/setMetadata"
@@ -1516,7 +1516,7 @@ defmodule ComputeEngineTest do
       "onHostMaintenance" => on_host,
       "automaticRestart"  => restart,
       "preemptible"       => pre
-    } |> Poison.encode!
+    } |> Jason.encode!
     endpoint  = @no_zone_ep <> "/zones/#{zone}/instances/#{instance}/setScheduling"
     expected  = build_expected(:post, endpoint, headers, body)
 
@@ -1534,7 +1534,7 @@ defmodule ComputeEngineTest do
       "onHostMaintenance" => on_host,
       "automaticRestart"  => restart,
       "preemptible"       => pre
-    } |> Poison.encode!
+    } |> Jason.encode!
     fields    = "a,b,c"
     query     = %{"fields" => fields}
     endpoint  = @no_zone_ep <> "/zones/#{zone}/instances/#{instance}/setScheduling"
@@ -1552,7 +1552,7 @@ defmodule ComputeEngineTest do
     body      = %{
       "items"       => items,
       "fingerprint" => fp
-    } |> Poison.encode!
+    } |> Jason.encode!
     endpoint  = @no_zone_ep <> "/zones/#{zone}/instances/#{instance}/setTags"
     expected  = build_expected(:post, endpoint, headers, body)
 
@@ -1568,7 +1568,7 @@ defmodule ComputeEngineTest do
     body      = %{
       "items"       => items,
       "fingerprint" => fp
-    } |> Poison.encode!
+    } |> Jason.encode!
     fields    = "a,b,c"
     query     = %{"fields" => fields}
     endpoint  = @no_zone_ep <> "/zones/#{zone}/instances/#{instance}/setTags"
@@ -1764,7 +1764,7 @@ defmodule ComputeEngineTest do
   test "insert_network (no fields)" do 
     resource = %{"abc" => 1, "def" => 2}
     headers  = [{"Content-Type", "application/json"}]
-    body     = resource |> Poison.encode!
+    body     = resource |> Jason.encode!
     endpoint = @no_zone_ep <> "/global/networks"
     expected = build_expected(:post, endpoint, headers, body)
 
@@ -1774,7 +1774,7 @@ defmodule ComputeEngineTest do
   test "insert_network (with fields)" do 
     resource = %{"abc" => 1, "def" => 2}
     headers  = [{"Content-Type", "application/json"}]
-    body     = resource |> Poison.encode!
+    body     = resource |> Jason.encode!
     fields   = "a,b,c"
     query    = %{"fields" => fields}
     endpoint = @no_zone_ep <> "/global/networks"

@@ -25,7 +25,7 @@ defmodule GCloudex.CloudTranslate.Impl do
 
       @spec translate(map :: map) :: HTTPResponse.t
       def translate(map) when is_map(map) do
-        request(:post, "language/translate/v2", Poison.encode!(map))
+        request(:post, "language/translate/v2", Jason.encode!(map))
       end
 
       @doc"""
@@ -37,7 +37,7 @@ defmodule GCloudex.CloudTranslate.Impl do
       """
       @spec detect(map :: map) :: HTTPResponse.t
       def detect(map) when is_map(map) do
-        request(:post, "language/translate/v2/detect", Poison.encode!(map))
+        request(:post, "language/translate/v2/detect", Jason.encode!(map))
       end
 
       @spec detect(body :: binary) :: HTTPResponse.t
