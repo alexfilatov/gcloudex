@@ -19,12 +19,12 @@ defmodule GCloudex.CloudTranslate.Impl do
         model: binary (optional, "base" or "nmt", "base" - Phrase-Based Machine Translation, "nmp" - Neural Machine Translation. "nmt" by default)
       }
       """
-      @spec translate(body :: binary) :: HTTPResponse.t
+      @spec translate(body :: any()) :: HTTPResponse.t
       def translate(body) when is_binary(body) do
         request(:post, "language/translate/v2", body)
       end
 
-      @spec translate(map :: map) :: HTTPResponse.t
+      @spec translate(map :: map()) :: HTTPResponse.t
       def translate(map) when is_map(map) do
         request(:post, "language/translate/v2", Jason.encode!(map))
       end
@@ -36,12 +36,12 @@ defmodule GCloudex.CloudTranslate.Impl do
         q: binary (required, the input text upon which to perform language detection)
       }
       """
-      @spec detect(map :: map) :: HTTPResponse.t
+      @spec detect(map :: map()) :: HTTPResponse.t
       def detect(map) when is_map(map) do
         request(:post, "language/translate/v2/detect", Jason.encode!(map))
       end
 
-      @spec detect(body :: binary) :: HTTPResponse.t
+      @spec detect(body :: any()) :: HTTPResponse.t
       def detect(body) when is_binary(body) do
         request(:post, "language/translate/v2/detect", body)
       end
@@ -55,14 +55,14 @@ defmodule GCloudex.CloudTranslate.Impl do
       }
       """
 
-      @spec languages(map :: map) :: HTTPResponse.t
+      @spec languages(map :: map()) :: HTTPResponse.t
       def languages(map) when is_map(map) do
         map
         |> URI.encode_query()
         |> languages()
       end
 
-      @spec languages(body :: binary) :: HTTPResponse.t
+      @spec languages(body :: any()) :: HTTPResponse.t
       def languages(body) do
         request(:get, "language/translate/v2/languages", body)
       end
